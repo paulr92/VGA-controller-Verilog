@@ -1,3 +1,8 @@
+///////////////////////////////////////////////
+//Created on: 09.07.2019                     //
+//Author: Paul Rusti -> rusti.paul@yahoo.com //
+///////////////////////////////////////////////
+
 `timescale 1ns/1ps
 
 module tb_display_timing_controller();

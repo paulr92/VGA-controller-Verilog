@@ -1,3 +1,7 @@
+///////////////////////////////////////////////
+//Created on: 09.07.2019                     //
+//Author: Paul Rusti -> rusti.paul@yahoo.com //
+///////////////////////////////////////////////
 module px_counter
   #(
 	parameter COUNTER_WIDTH = 8,

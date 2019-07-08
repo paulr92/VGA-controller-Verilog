@@ -1,3 +1,7 @@
+///////////////////////////////////////////////
+//Created on: 09.07.2019                     //
+//Author: Paul Rusti -> rusti.paul@yahoo.com //
+///////////////////////////////////////////////
 module dispaly_timing_controller(
 	input clk, rst, 			//Controller pixel clock and reset
 	output hs, vs,  			//Output timings to VGA port
