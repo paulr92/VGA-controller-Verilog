@@ -34,10 +34,12 @@ wire [10-1:0] hor_ctr_q, vert_ctr_q;
 assign vert_tick = 1'b1 ? (hor_ctr_q == H_TOTAL-1) : 1'b0;
 
 assign hs = (hor_ctr_q < H_SYNC) ? (HS_POLARITY_POSITIVE) : (!HS_POLARITY_POSITIVE);
-assign hor_act = (hor_ctr_q > (H_SYNC + H_BP + H_L_BORDER - 1)) && (hor_ctr_q < H_SYNC + H_BP + H_L_BORDER + H_ADDR_DUR) ;
+assign hor_act = (hor_ctr_q > (H_SYNC + H_BP + H_L_BORDER - 2)) && (hor_ctr_q < H_SYNC + H_BP + H_L_BORDER + H_ADDR_DUR -1);
+assign x = ((hor_ctr_q > H_SYNC + H_BP + H_L_BORDER - 2) && (hor_ctr_q < H_SYNC + H_BP + H_L_BORDER + H_ADDR_DUR - 1)) ? (hor_ctr_q - H_SYNC - H_BP - H_L_BORDER + 1) : (0);
 
 assign vs = (vert_ctr_q < V_SYNC) ? (VS_POLARITY_POSITIVE) : (!VS_POLARITY_POSITIVE);
-assign vert_act = (vert_ctr_q > (V_SYNC + V_BP + V_TOP_BORDER - 1)) && (vert_ctr_q < V_SYNC + V_BP + V_TOP_BORDER + V_ADDR_DUR) ;
+assign vert_act = (vert_ctr_q > (V_SYNC + V_BP + V_TOP_BORDER - 2)) && (vert_ctr_q < V_SYNC + V_BP + V_TOP_BORDER + V_ADDR_DUR - 1);
+assign y = ((vert_ctr_q > V_SYNC + V_BP + V_TOP_BORDER - 2) && (vert_ctr_q < V_SYNC + V_BP + V_TOP_BORDER + V_ADDR_DUR - 1)) ? (vert_ctr_q - V_SYNC - V_BP - V_TOP_BORDER + 1) : (0);
 
 px_counter  #(.COUNTER_WIDTH(COUNTER_WIDTH), .TERMINAL_COUNT_VAL(H_TOTAL-1), .RESET_VALUE(RESET_VALUE)) hor_counter  (.clk(clk), .rst(rst), .en(1'b1), .q(hor_ctr_q));
 px_counter  #(.COUNTER_WIDTH(COUNTER_WIDTH), .TERMINAL_COUNT_VAL(V_TOTAL-1), .RESET_VALUE(RESET_VALUE)) vert_counter (.clk(clk), .rst(rst), .en(vert_tick), .q(vert_ctr_q));
