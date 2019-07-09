@@ -64,8 +64,8 @@ assign hor_act = (hor_ctr_q >= (H_SYNC + H_BP + H_L_BORDER - PX_BUFFER_LATENCY))
 assign x = ((hor_ctr_q >= H_SYNC + H_BP + H_L_BORDER - PX_BUFFER_LATENCY) && (hor_ctr_q < H_SYNC + H_BP + H_L_BORDER + H_ADDR_DUR - PX_BUFFER_LATENCY)) ? (hor_ctr_q - H_SYNC - H_BP - H_L_BORDER + PX_BUFFER_LATENCY) : (0);
 
 assign vs = (vert_ctr_q < V_SYNC) ? (VS_POLARITY_POSITIVE) : (!VS_POLARITY_POSITIVE);
-assign vert_act = (vert_ctr_q >= (V_SYNC + V_BP + V_TOP_BORDER - PX_BUFFER_LATENCY)) && (vert_ctr_q < V_SYNC + V_BP + V_TOP_BORDER + V_ADDR_DUR - PX_BUFFER_LATENCY);
-assign y = ((vert_ctr_q >= V_SYNC + V_BP + V_TOP_BORDER - PX_BUFFER_LATENCY) && (vert_ctr_q < V_SYNC + V_BP + V_TOP_BORDER + V_ADDR_DUR - PX_BUFFER_LATENCY)) ? (vert_ctr_q - V_SYNC - V_BP - V_TOP_BORDER + PX_BUFFER_LATENCY) : (0);
+assign vert_act = (vert_ctr_q >= (V_SYNC + V_BP + V_TOP_BORDER - 0)) && (vert_ctr_q < V_SYNC + V_BP + V_TOP_BORDER + V_ADDR_DUR - 0);
+assign y = ((vert_ctr_q >= V_SYNC + V_BP + V_TOP_BORDER ) && (vert_ctr_q < V_SYNC + V_BP + V_TOP_BORDER + V_ADDR_DUR )) ? (vert_ctr_q - V_SYNC - V_BP - V_TOP_BORDER ) : (0);
 
 px_counter  #(.COUNTER_WIDTH(COUNTER_WIDTH), .TERMINAL_COUNT_VAL(H_TOTAL-1), .RESET_VALUE(RESET_VALUE)) hor_counter  (.clk(clk), .rst(rst), .en(1'b1), .q(hor_ctr_q));
 px_counter  #(.COUNTER_WIDTH(COUNTER_WIDTH), .TERMINAL_COUNT_VAL(V_TOTAL-1), .RESET_VALUE(RESET_VALUE)) vert_counter (.clk(clk), .rst(rst), .en(vert_tick), .q(vert_ctr_q));
