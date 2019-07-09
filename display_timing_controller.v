@@ -35,7 +35,7 @@ localparam V_FP         = 2;
 wire vert_tick, hor_act, vert_act;
 wire [10-1:0] hor_ctr_q, vert_ctr_q;
 
-assign vert_tick = 1'b1 ? (hor_ctr_q == H_TOTAL-1) : 1'b0;
+assign vert_tick = (hor_ctr_q == H_TOTAL-1);
 
 assign hs = (hor_ctr_q < H_SYNC) ? (HS_POLARITY_POSITIVE) : (!HS_POLARITY_POSITIVE);
 assign hor_act = (hor_ctr_q > (H_SYNC + H_BP + H_L_BORDER - 2)) && (hor_ctr_q < H_SYNC + H_BP + H_L_BORDER + H_ADDR_DUR -1);
